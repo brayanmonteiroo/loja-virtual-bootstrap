@@ -1,0 +1,32 @@
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/random/1920x1080/?electronics');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+}
+
+.product-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.category-filter {
+    position: sticky;
+    top: 20px;
+}
+
+.cart-badge {
+    position: relative;
+    top: -10px;
+    right: -5px;
+}
+
+.product-image {
+    height: 200px;
+    object-fit: contain;
+}
