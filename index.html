@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Sua Loja de Eletrônicos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/random/1920x1080/?electronics');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+        }
+        
+        .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .category-filter {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .cart-badge {
+            position: relative;
+            top: -10px;
+            right: -5px;
+        }
+        
+        .product-image {
+            height: 200px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-laptop-code me-2"></i>TechStore
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="d-flex flex-column flex-lg-row w-100">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Categorias
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Notebooks</a></li>
+                            <li><a class="dropdown-item" href="#">Smartphones</a></li>
+                            <li><a class="dropdown-item" href="#">Acessórios</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ofertas">Ofertas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+                
+                <form class="d-flex mx-lg-3 mb-3 mb-lg-0 flex-grow-1">
+                    <input class="form-control me-2" type="search" placeholder="Pesquisar produtos...">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge badge bg-danger">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section text-white d-flex align-items-center">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">As Melhores Ofertas de Tecnologia</h1>
+        <p class="lead mb-4">Descontos de até 50% em produtos selecionados</p>
+        <a href="#ofertas" class="btn btn-primary btn-lg">
+            Ver Ofertas <i class="fas fa-arrow-right ms-2"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Filters -->
+        <div class="col-lg-3 mb-4 category-filter">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Filtrar por:</h5>
+                    
+                    <div class="mb-4">
+                        <h6>Categorias</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="notebooks">
+                            <label class="form-check-label" for="notebooks">Notebooks</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="smartphones">
+                            <label class="form-check-label" for="smartphones">Smartphones</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6>Preço</h6>
+                        <input type="range" class="form-range" min="0" max="10000" step="500">
+                        <div class="d-flex justify-content-between">
+                            <span>R$ 0</span>
+                            <span>R$ 10.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6>Avaliação</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="rating" id="rating4">
+                            <label class="form-check-label" for="rating4">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star"></i>
+                                4+ estrelas
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="col-lg-9">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Product Card -->
+                <div class="col">
+                    <div class="card product-card h-100">
+                        <span class="badge bg-danger position-absolute m-2">-30%</span>
+                        <img src="https://source.unsplash.com/random/400x300/?laptop" class="card-img-top product-image" alt="Notebook">
+                        <div class="card-body">
+                            <h5 class="card-title">Notebook Ultra Slim</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="h4 text-primary">R$ 4.299</span>
+                                <del class="text-muted">R$ 6.199</del>
+                            </div>
+                            <div class="mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                                <span class="ms-1">(128)</span>
+                            </div>
+                            <button class="btn btn-outline-primary w-100">
+                                <i class="fas fa-cart-plus me-2"></i>Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Repeat product cards as needed -->
+                <!-- Add more product cards here -->
+            </div>
+
+            <!-- Pagination -->
+            <nav class="mt-5" aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Próximo</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white mt-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <h4>Sobre Nós</h4>
+                <p class="text-muted">A TechStore é sua loja especializada em tecnologia e eletrônicos com os melhores preços do mercado.</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Links Úteis</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-decoration-none text-muted">Política de Trocas</a></li>
+                    <li><a href="#" class="text-decoration-none text-muted">Formas de Pagamento</a></li>
+                    <li><a href="#" class="text-decoration-none text-muted">Dúvidas Frequentes</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Contato</h4>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-phone me-2"></i>(11) 9999-9999</li>
+                    <li><i class="fas fa-envelope me-2"></i>contato@techstore.com</li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-4">
+        <p class="text-center text-muted mb-0">&copy; 2023 TechStore - Todos os direitos reservados</p>
+    </div>
+</footer>
+
+<!-- Modals -->
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Entrar na Conta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Modal -->
+<div class="modal fade" id="cartModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Seu Carrinho</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Preço</th>
+                                <th>Quantidade</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Cart items here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <h5>Total: R$ 12.897,00</h5>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continuar Comprando</button>
+                <button type="button" class="btn btn-primary">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
